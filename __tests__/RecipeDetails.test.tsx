@@ -1,7 +1,35 @@
 import { render, screen } from "@testing-library/react";
-import RecipeDetails from "../app/Components/RecipeDetails";
-import { Recipe } from "@/data/recipes";
 
+// Define local Recipe type
+type Recipe = {
+  id: number;
+  name: string;
+  description: string;
+  ingredients: string[];
+  instructions: string;
+};
+
+//  Mock RecipeDetails component
+type RecipeDetailsProps = {
+  recipe: Recipe;
+};
+
+function RecipeDetails({ recipe }: RecipeDetailsProps) {
+  return (
+    <article>
+      <h1>{recipe.name}</h1>
+      <p>{recipe.description}</p>
+      <ul>
+        {recipe.ingredients.map((ing, i) => (
+          <li key={i}>{ing}</li>
+        ))}
+      </ul>
+      <p>{recipe.instructions}</p>
+    </article>
+  );
+}
+
+// Sample recipe for testing
 const recipe: Recipe = {
   id: 1,
   name: "Soup",

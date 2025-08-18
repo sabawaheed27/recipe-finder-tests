@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Header Component matches snapshot for default props 1`] = `
+<DocumentFragment>
+  <header
+    role="banner"
+  >
+    <h1>
+      Snapshot Test
+    </h1>
+    <p>
+      Favorites: 10
+    </p>
+  </header>
+</DocumentFragment>
+`;
