@@ -1,23 +1,9 @@
+
+
+
 import { render, screen } from "@testing-library/react";
+import Header from "../app/Components/Header";
 
-// Mock Header component 
-type HeaderProps = {
-  title: string;
-  favoritesCount: number;
-  subtitle?: string;
-};
-
-function Header({ title, favoritesCount, subtitle }: HeaderProps) {
-  return (
-    <header role="banner">
-      <h1>{title}</h1>
-      {subtitle && <h2 data-testid="subtitle">{subtitle}</h2>}
-      <p>Favorites: {favoritesCount}</p>
-    </header>
-  );
-}
-
-// Tests describing expected behavior
 describe("Header Component", () => {
   it("renders the main heading", () => {
     render(<Header title="Recipe Finder" favoritesCount={3} />);

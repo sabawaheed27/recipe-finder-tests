@@ -1,34 +1,7 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent,  } from "@testing-library/react";
+import SearchBar from "../app/Components/SearchBar";
 import "@testing-library/jest-dom";
-import React, { forwardRef, createRef } from "react";
-
-// Mock SearchBar component
-type SearchBarProps = {
-  value: string;
-  onChange: (value: string) => void;
-  onSearch: (value: string) => void;
-};
-
-const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
-  ({ value, onChange, onSearch }, ref) => {
-    return (
-      <div>
-        <input
-          ref={ref}
-          type="text"
-          value={value}
-          placeholder="Search recipes"
-          aria-label="Search recipes"
-          onChange={(e) => onChange(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") onSearch(value);
-          }}
-        />
-        <button onClick={() => onSearch(value)}>Search</button>
-      </div>
-    );
-  }
-);
+import React, { createRef } from "react";
 
 describe("SearchBar Component", () => {
   it("renders an input with placeholder", () => {
@@ -37,22 +10,23 @@ describe("SearchBar Component", () => {
   });
 
   it("renders with the given value", () => {
-    render(<SearchBar value="Tacos" onChange={() => {}} onSearch={() => {}} />);
-    expect(screen.getByRole("textbox")).toHaveValue("Tacos");
-  });
+  render(<SearchBar value="Tacos" onChange={() => {}} onSearch={() => {}} />);
+  expect(screen.getByRole("textbox")).toHaveValue("Tacos");
+});
 
-  it("renders exactly one input and one button", () => {
-    render(<SearchBar value="" onChange={() => {}} onSearch={() => {}} />);
-    expect(screen.getAllByRole("textbox")).toHaveLength(1);
-    expect(screen.getAllByRole("button")).toHaveLength(1);
-  });
+it("renders exactly one input and one button", () => {
+  render(<SearchBar value="" onChange={() => {}} onSearch={() => {}} />);
+  expect(screen.getAllByRole("textbox")).toHaveLength(1);
+  expect(screen.getAllByRole("button")).toHaveLength(1);
+});
 
-  it("button is clickable even when value is empty", () => {
-    const mockSearch = jest.fn();
-    render(<SearchBar value="" onChange={() => {}} onSearch={mockSearch} />);
-    fireEvent.click(screen.getByRole("button", { name: /search/i }));
-    expect(mockSearch).toHaveBeenCalled();
-  });
+it("button is clickable even when value is empty", () => {
+  const mockSearch = jest.fn();
+  render(<SearchBar value="" onChange={() => {}} onSearch={mockSearch} />);
+  fireEvent.click(screen.getByRole("button", { name: /search/i }));
+  expect(mockSearch).toHaveBeenCalled();
+});
+
 
   it("calls onSearch when pressing Enter in the input", () => {
     const mockSearch = jest.fn();
